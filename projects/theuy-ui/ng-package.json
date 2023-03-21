@@ -7,11 +7,6 @@
   "assets": [
     {
       "glob": "**/*",
-      "input": "src/material",
-      "output": "material"
-    },
-    {
-      "glob": "**/*",
       "input": "src/donna",
       "output": "donna"
     }

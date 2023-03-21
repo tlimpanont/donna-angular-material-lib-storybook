@@ -11,4 +11,7 @@ export const parameters = {
     },
   },
   docs: { inlineStories: true },
+  backgrounds: {
+    default: 'dark'
+  }
 };

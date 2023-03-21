@@ -17,22 +17,69 @@
     "injectables": [
         {
             "name": "TheuyUiService",
-            "id": "injectable-TheuyUiService-0b721210eb195242f2dea666714839e44d3f2949dcb7faf8dbf937b16246254979aa9abe68043e4b7dce02bcc44785ed26a8b7917a06c20eaf844fbba4902b83",
+            "id": "injectable-TheuyUiService-38dae7aecbf1d00d2cc04b4dbf72da8c367b9bd5cceac034d77375193517028c2a009931a310c05ce544ea50948748b324393fc8eaaaa67d7f047917231569b4",
             "file": "projects/theuy-ui/src/lib/theuy-ui.service.ts",
             "properties": [],
-            "methods": [],
+            "methods": [
+                {
+                    "name": "registerCustomIcons",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 15,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from '@angular/core';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class TheuyUiService {\n\n  constructor() { }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { MatIconRegistry } from '@angular/material/icon';\nimport { DomSanitizer } from '@angular/platform-browser';\nimport { customIcons as donnaIcons } from '../donna/icons';\n\n@Injectable({\n  providedIn: 'root',\n})\nexport class TheuyUiService {\n  constructor(\n    private matIconRegistry: MatIconRegistry,\n    private domSanitizer: DomSanitizer\n  ) {}\n\n  public registerCustomIcons() {\n    donnaIcons.forEach(({ iconName, rawHTML }) => {\n      this.matIconRegistry.addSvgIconLiteral(\n        iconName.toString(),\n        this.domSanitizer.bypassSecurityTrustHtml(rawHTML)\n      );\n    });\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "args": [],
-                "line": 6
+                "args": [
+                    {
+                        "name": "matIconRegistry",
+                        "type": "MatIconRegistry",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "domSanitizer",
+                        "type": "DomSanitizer",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 9,
+                "jsdoctags": [
+                    {
+                        "name": "matIconRegistry",
+                        "type": "MatIconRegistry",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "domSanitizer",
+                        "type": "DomSanitizer",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
             },
             "type": "injectable"
         }
@@ -321,7 +368,7 @@
         },
         {
             "name": "TheuyUiComponent",
-            "id": "component-TheuyUiComponent-1aa5f0fcee36d516fbfd07d16fb17c39da8087c2248dbdf82b80dddf44c29a0013efb897edf8df46c57b38026152bf57c3ea86771cec75318f2fb9f87627f50d",
+            "id": "component-TheuyUiComponent-cb498f53ed8d7c8cb79f6eabffccb690d01802c89be701c99a5e276293b84bec82b8d2e2be79a87cd2045cae7f38b054a28ba1ee37bd2228511c98a0fae392d6",
             "file": "projects/theuy-ui/src/lib/theuy-ui.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -331,7 +378,6 @@
             "selector": "lib-theuy-ui",
             "styleUrls": [],
             "styles": [],
-            "template": "<p>theuy-ui works!</p>\n<button mat-flat-button color=\"accent\">My button</button>\n",
             "templateUrl": [],
             "viewProviders": [],
             "inputsClass": [],
@@ -345,7 +391,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'lib-theuy-ui',\n  template: `\n    <p>theuy-ui works!</p>\n    <button mat-flat-button color=\"accent\">My button</button>\n  `,\n  styles: [],\n})\nexport class TheuyUiComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport {CUSTOM_ICONS as DONNA_ICONS} from \"../donna/icons\";\n\n@Component({\n  selector: 'lib-theuy-ui',\n  template: `\n    <p>theuy-ui works!</p>\n    <button mat-flat-button color=\"accent\" class=\"small-button\">\n      Small button\n      <mat-icon svgIcon=\"${DONNA_ICONS[\"filter-outlined\"]}\"></mat-icon>\n      <mat-icon svgIcon=\"${DONNA_ICONS[\"placeholder-outlined\"]}\" iconPositionEnd></mat-icon>\n    </button>\n  `,\n  styles: [],\n})\nexport class TheuyUiComponent {}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": ""
@@ -354,17 +400,21 @@
     "modules": [
         {
             "name": "TheuyUiModule",
-            "id": "module-TheuyUiModule-100be29fc279e1b2b0dad663c1b37262a8e0ea34c514536d92b18c4812f8f0c92edcc9f78f2b0700e7818b5444b79dfc9ccb455ed1170ed3be8e35a37c07ce07",
+            "id": "module-TheuyUiModule-977fb5774360f98bdb8e350a2a7b49659f5e748a8fe0a2fdb78d9e56defef01f5f37261442e9380a37c221bc279fb08a9c9ae5498c529b48d6f2148c5735142a",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "projects/theuy-ui/src/lib/theuy-ui.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { TheuyUiComponent } from './theuy-ui.component';\nimport { MatButtonModule } from '@angular/material/button';\n\n@NgModule({\n  declarations: [TheuyUiComponent],\n  imports: [MatButtonModule],\n  exports: [TheuyUiComponent],\n})\nexport class TheuyUiModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { TheuyUiComponent } from './theuy-ui.component';\nimport { MatButtonModule } from '@angular/material/button';\nimport { TheuyUiService } from './theuy-ui.service';\nimport {MatIconModule} from \"@angular/material/icon\";\n\n@NgModule({\n  declarations: [TheuyUiComponent],\n  imports: [MatButtonModule, MatIconModule],\n  exports: [TheuyUiComponent],\n  providers: [TheuyUiService],\n})\nexport class TheuyUiModule {\n  constructor(private service: TheuyUiService) {\n    this.service.registerCustomIcons();\n  }\n}\n",
             "children": [
                 {
                     "type": "providers",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "TheuyUiService"
+                        }
+                    ]
                 },
                 {
                     "type": "declarations",
@@ -399,6 +449,26 @@
     ],
     "miscellaneous": {
         "variables": [
+            {
+                "name": "customIcons",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "dist/theuy-ui/donna/icons/index.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Array<literal type>",
+                "defaultValue": "[\n  {\n    iconName: CUSTOM_ICONS['add-circle-outlined'],\n    rawHTML: `<svg width=\"19\" height=\"19\" viewBox=\"0 0 19 19\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M0.639155 1.50561C0.853798 1.02079 1.33743 0.599838 1.99775 0.599838H17.0022C17.663 0.599838 18.1468 1.02131 18.3612 1.50648C18.5743 1.98846 18.5604 2.60615 18.1903 3.10974L13.5661 9.53036C13.5565 9.54333 13.546 9.56776 13.546 9.6V13.6042C13.546 14.116 13.3032 14.6169 12.8638 14.9138L7.77747 18.3479C7.52855 18.5161 7.24726 18.6002 6.96476 18.6002C6.13786 18.6002 5.46807 17.9042 5.46659 17.0411L5.45406 9.60133C5.45399 9.56931 5.44354 9.54489 5.43394 9.53189L5.42878 9.52489L0.808782 3.10854C0.439372 2.6048 0.425875 1.98735 0.639155 1.50561ZM1.98655 2.17491C1.98818 2.1941 1.99414 2.21176 2.00761 2.23002L2.01278 2.23703L6.63281 8.65343C6.83464 8.92878 6.93972 9.26197 6.94032 9.59868L6.95285 17.0386C6.9529 17.0636 6.95748 17.08 6.96149 17.0899C6.96333 17.0945 6.96532 17.0983 6.96733 17.1016L12.0317 13.6823C12.0317 13.6823 12.0393 13.6766 12.0466 13.6625C12.054 13.6481 12.0597 13.628 12.0597 13.6042V9.6C12.0597 9.26189 12.165 8.92711 12.368 8.65073L16.9923 2.23007C17.0058 2.21183 17.0118 2.19423 17.0134 2.17504C17.0153 2.15319 17.0113 2.12877 17.0018 2.10735C16.9974 2.09739 16.993 2.09052 16.9896 2.0861H2.01041C2.00702 2.09051 2.00258 2.09736 1.99819 2.10729C1.98872 2.12867 1.98469 2.15306 1.98655 2.17491Z\" fill=\"black\"/> </svg>`,\n  },\n  {\n    iconName: CUSTOM_ICONS['placeholder-outlined'],\n    rawHTML: `<svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M12.0909 0.454545H1.90909C1.10909 0.454545 0.454545 1.10909 0.454545 1.90909V12.0909C0.454545 12.8909 1.10909 13.5455 1.90909 13.5455H12.0909C12.8909 13.5455 13.5455 12.8909 13.5455 12.0909V1.90909C13.5455 1.10909 12.8909 0.454545 12.0909 0.454545ZM12.0909 12.0909H1.90909V1.90909H12.0909V12.0909ZM8.42545 7.21091L6.42545 9.78546L5 8.06909L3 10.6364H11L8.42545 7.21091Z\" fill=\"black\"/>\n</svg>`,\n  },\n  {\n    iconName: CUSTOM_ICONS['add-circle-outlined'],\n    rawHTML: `<svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13.5455 7C13.5455 10.615 10.615 13.5455 7 13.5455C3.38504 13.5455 0.454544 10.615 0.454544 7C0.454544 3.38504 3.38504 0.454544 7 0.454544C10.615 0.454544 13.5455 3.38504 13.5455 7ZM12.3405 7C12.3405 9.94948 9.94948 12.3405 7 12.3405C4.05051 12.3405 1.65948 9.94948 1.65948 7C1.65948 4.05051 4.05051 1.65948 7 1.65948C9.94948 1.65948 12.3405 4.05051 12.3405 7Z\" fill=\"black\"/>\n<path d=\"M7.65477 4.41418C7.65477 4.05268 7.36172 3.75963 7.00023 3.75963C6.63873 3.75963 6.34568 4.05268 6.34568 4.41418V6.34553H4.41481C4.05332 6.34553 3.75978 6.63858 3.75978 7.00007C3.75978 7.36157 4.05283 7.65462 4.41433 7.65462H6.34568V9.58597C6.34568 9.94747 6.63873 10.2405 7.00023 10.2405C7.36172 10.2405 7.65477 9.94747 7.65477 9.58597V7.65462H9.58613C9.94762 7.65462 10.2407 7.36157 10.2407 7.00007C10.2407 6.63858 9.94762 6.34553 9.58613 6.34553H7.65477V4.41418Z\" fill=\"black\"/>\n</svg>\n`,\n  },\n]"
+            },
+            {
+                "name": "customIcons",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/theuy-ui/src/donna/icons/index.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Array<literal type>",
+                "defaultValue": "[\n  {\n    iconName: CUSTOM_ICONS['add-circle-outlined'],\n    rawHTML: `<svg width=\"19\" height=\"19\" viewBox=\"0 0 19 19\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M0.639155 1.50561C0.853798 1.02079 1.33743 0.599838 1.99775 0.599838H17.0022C17.663 0.599838 18.1468 1.02131 18.3612 1.50648C18.5743 1.98846 18.5604 2.60615 18.1903 3.10974L13.5661 9.53036C13.5565 9.54333 13.546 9.56776 13.546 9.6V13.6042C13.546 14.116 13.3032 14.6169 12.8638 14.9138L7.77747 18.3479C7.52855 18.5161 7.24726 18.6002 6.96476 18.6002C6.13786 18.6002 5.46807 17.9042 5.46659 17.0411L5.45406 9.60133C5.45399 9.56931 5.44354 9.54489 5.43394 9.53189L5.42878 9.52489L0.808782 3.10854C0.439372 2.6048 0.425875 1.98735 0.639155 1.50561ZM1.98655 2.17491C1.98818 2.1941 1.99414 2.21176 2.00761 2.23002L2.01278 2.23703L6.63281 8.65343C6.83464 8.92878 6.93972 9.26197 6.94032 9.59868L6.95285 17.0386C6.9529 17.0636 6.95748 17.08 6.96149 17.0899C6.96333 17.0945 6.96532 17.0983 6.96733 17.1016L12.0317 13.6823C12.0317 13.6823 12.0393 13.6766 12.0466 13.6625C12.054 13.6481 12.0597 13.628 12.0597 13.6042V9.6C12.0597 9.26189 12.165 8.92711 12.368 8.65073L16.9923 2.23007C17.0058 2.21183 17.0118 2.19423 17.0134 2.17504C17.0153 2.15319 17.0113 2.12877 17.0018 2.10735C16.9974 2.09739 16.993 2.09052 16.9896 2.0861H2.01041C2.00702 2.09051 2.00258 2.09736 1.99819 2.10729C1.98872 2.12867 1.98469 2.15306 1.98655 2.17491Z\" fill=\"black\"/> </svg>`,\n  },\n  {\n    iconName: CUSTOM_ICONS['placeholder-outlined'],\n    rawHTML: `<svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M12.0909 0.454545H1.90909C1.10909 0.454545 0.454545 1.10909 0.454545 1.90909V12.0909C0.454545 12.8909 1.10909 13.5455 1.90909 13.5455H12.0909C12.8909 13.5455 13.5455 12.8909 13.5455 12.0909V1.90909C13.5455 1.10909 12.8909 0.454545 12.0909 0.454545ZM12.0909 12.0909H1.90909V1.90909H12.0909V12.0909ZM8.42545 7.21091L6.42545 9.78546L5 8.06909L3 10.6364H11L8.42545 7.21091Z\" fill=\"black\"/>\n</svg>`,\n  },\n  {\n    iconName: CUSTOM_ICONS['add-circle-outlined'],\n    rawHTML: `<svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13.5455 7C13.5455 10.615 10.615 13.5455 7 13.5455C3.38504 13.5455 0.454544 10.615 0.454544 7C0.454544 3.38504 3.38504 0.454544 7 0.454544C10.615 0.454544 13.5455 3.38504 13.5455 7ZM12.3405 7C12.3405 9.94948 9.94948 12.3405 7 12.3405C4.05051 12.3405 1.65948 9.94948 1.65948 7C1.65948 4.05051 4.05051 1.65948 7 1.65948C9.94948 1.65948 12.3405 4.05051 12.3405 7Z\" fill=\"black\"/>\n<path d=\"M7.65477 4.41418C7.65477 4.05268 7.36172 3.75963 7.00023 3.75963C6.63873 3.75963 6.34568 4.05268 6.34568 4.41418V6.34553H4.41481C4.05332 6.34553 3.75978 6.63858 3.75978 7.00007C3.75978 7.36157 4.05283 7.65462 4.41433 7.65462H6.34568V9.58597C6.34568 9.94747 6.63873 10.2405 7.00023 10.2405C7.36172 10.2405 7.65477 9.94747 7.65477 9.58597V7.65462H9.58613C9.94762 7.65462 10.2407 7.36157 10.2407 7.00007C10.2407 6.63858 9.94762 6.34553 9.58613 6.34553H7.65477V4.41418Z\" fill=\"black\"/>\n</svg>\n`,\n  },\n]"
+            },
             {
                 "name": "DonnaTheme",
                 "ctype": "miscellaneous",
@@ -503,21 +573,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "stories/Button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<Button>",
-                "defaultValue": "(args: Button) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "stories/Header.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<Header>",
                 "defaultValue": "(args: Header) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "stories/Button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<Button>",
+                "defaultValue": "(args: Button) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -542,8 +612,85 @@
         ],
         "functions": [],
         "typealiases": [],
-        "enumerations": [],
+        "enumerations": [
+            {
+                "name": "CUSTOM_ICONS",
+                "childs": [
+                    {
+                        "name": "filter-outlined",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "placeholder-outlined",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "add-circle-outlined",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "file": "dist/theuy-ui/donna/icons/index.ts"
+            },
+            {
+                "name": "CUSTOM_ICONS",
+                "childs": [
+                    {
+                        "name": "filter-outlined",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "placeholder-outlined",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "add-circle-outlined",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "file": "projects/theuy-ui/src/donna/icons/index.ts"
+            }
+        ],
         "groupedVariables": {
+            "dist/theuy-ui/donna/icons/index.ts": [
+                {
+                    "name": "customIcons",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "dist/theuy-ui/donna/icons/index.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Array<literal type>",
+                    "defaultValue": "[\n  {\n    iconName: CUSTOM_ICONS['add-circle-outlined'],\n    rawHTML: `<svg width=\"19\" height=\"19\" viewBox=\"0 0 19 19\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M0.639155 1.50561C0.853798 1.02079 1.33743 0.599838 1.99775 0.599838H17.0022C17.663 0.599838 18.1468 1.02131 18.3612 1.50648C18.5743 1.98846 18.5604 2.60615 18.1903 3.10974L13.5661 9.53036C13.5565 9.54333 13.546 9.56776 13.546 9.6V13.6042C13.546 14.116 13.3032 14.6169 12.8638 14.9138L7.77747 18.3479C7.52855 18.5161 7.24726 18.6002 6.96476 18.6002C6.13786 18.6002 5.46807 17.9042 5.46659 17.0411L5.45406 9.60133C5.45399 9.56931 5.44354 9.54489 5.43394 9.53189L5.42878 9.52489L0.808782 3.10854C0.439372 2.6048 0.425875 1.98735 0.639155 1.50561ZM1.98655 2.17491C1.98818 2.1941 1.99414 2.21176 2.00761 2.23002L2.01278 2.23703L6.63281 8.65343C6.83464 8.92878 6.93972 9.26197 6.94032 9.59868L6.95285 17.0386C6.9529 17.0636 6.95748 17.08 6.96149 17.0899C6.96333 17.0945 6.96532 17.0983 6.96733 17.1016L12.0317 13.6823C12.0317 13.6823 12.0393 13.6766 12.0466 13.6625C12.054 13.6481 12.0597 13.628 12.0597 13.6042V9.6C12.0597 9.26189 12.165 8.92711 12.368 8.65073L16.9923 2.23007C17.0058 2.21183 17.0118 2.19423 17.0134 2.17504C17.0153 2.15319 17.0113 2.12877 17.0018 2.10735C16.9974 2.09739 16.993 2.09052 16.9896 2.0861H2.01041C2.00702 2.09051 2.00258 2.09736 1.99819 2.10729C1.98872 2.12867 1.98469 2.15306 1.98655 2.17491Z\" fill=\"black\"/> </svg>`,\n  },\n  {\n    iconName: CUSTOM_ICONS['placeholder-outlined'],\n    rawHTML: `<svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M12.0909 0.454545H1.90909C1.10909 0.454545 0.454545 1.10909 0.454545 1.90909V12.0909C0.454545 12.8909 1.10909 13.5455 1.90909 13.5455H12.0909C12.8909 13.5455 13.5455 12.8909 13.5455 12.0909V1.90909C13.5455 1.10909 12.8909 0.454545 12.0909 0.454545ZM12.0909 12.0909H1.90909V1.90909H12.0909V12.0909ZM8.42545 7.21091L6.42545 9.78546L5 8.06909L3 10.6364H11L8.42545 7.21091Z\" fill=\"black\"/>\n</svg>`,\n  },\n  {\n    iconName: CUSTOM_ICONS['add-circle-outlined'],\n    rawHTML: `<svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13.5455 7C13.5455 10.615 10.615 13.5455 7 13.5455C3.38504 13.5455 0.454544 10.615 0.454544 7C0.454544 3.38504 3.38504 0.454544 7 0.454544C10.615 0.454544 13.5455 3.38504 13.5455 7ZM12.3405 7C12.3405 9.94948 9.94948 12.3405 7 12.3405C4.05051 12.3405 1.65948 9.94948 1.65948 7C1.65948 4.05051 4.05051 1.65948 7 1.65948C9.94948 1.65948 12.3405 4.05051 12.3405 7Z\" fill=\"black\"/>\n<path d=\"M7.65477 4.41418C7.65477 4.05268 7.36172 3.75963 7.00023 3.75963C6.63873 3.75963 6.34568 4.05268 6.34568 4.41418V6.34553H4.41481C4.05332 6.34553 3.75978 6.63858 3.75978 7.00007C3.75978 7.36157 4.05283 7.65462 4.41433 7.65462H6.34568V9.58597C6.34568 9.94747 6.63873 10.2405 7.00023 10.2405C7.36172 10.2405 7.65477 9.94747 7.65477 9.58597V7.65462H9.58613C9.94762 7.65462 10.2407 7.36157 10.2407 7.00007C10.2407 6.63858 9.94762 6.34553 9.58613 6.34553H7.65477V4.41418Z\" fill=\"black\"/>\n</svg>\n`,\n  },\n]"
+                }
+            ],
+            "projects/theuy-ui/src/donna/icons/index.ts": [
+                {
+                    "name": "customIcons",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/theuy-ui/src/donna/icons/index.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Array<literal type>",
+                    "defaultValue": "[\n  {\n    iconName: CUSTOM_ICONS['add-circle-outlined'],\n    rawHTML: `<svg width=\"19\" height=\"19\" viewBox=\"0 0 19 19\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M0.639155 1.50561C0.853798 1.02079 1.33743 0.599838 1.99775 0.599838H17.0022C17.663 0.599838 18.1468 1.02131 18.3612 1.50648C18.5743 1.98846 18.5604 2.60615 18.1903 3.10974L13.5661 9.53036C13.5565 9.54333 13.546 9.56776 13.546 9.6V13.6042C13.546 14.116 13.3032 14.6169 12.8638 14.9138L7.77747 18.3479C7.52855 18.5161 7.24726 18.6002 6.96476 18.6002C6.13786 18.6002 5.46807 17.9042 5.46659 17.0411L5.45406 9.60133C5.45399 9.56931 5.44354 9.54489 5.43394 9.53189L5.42878 9.52489L0.808782 3.10854C0.439372 2.6048 0.425875 1.98735 0.639155 1.50561ZM1.98655 2.17491C1.98818 2.1941 1.99414 2.21176 2.00761 2.23002L2.01278 2.23703L6.63281 8.65343C6.83464 8.92878 6.93972 9.26197 6.94032 9.59868L6.95285 17.0386C6.9529 17.0636 6.95748 17.08 6.96149 17.0899C6.96333 17.0945 6.96532 17.0983 6.96733 17.1016L12.0317 13.6823C12.0317 13.6823 12.0393 13.6766 12.0466 13.6625C12.054 13.6481 12.0597 13.628 12.0597 13.6042V9.6C12.0597 9.26189 12.165 8.92711 12.368 8.65073L16.9923 2.23007C17.0058 2.21183 17.0118 2.19423 17.0134 2.17504C17.0153 2.15319 17.0113 2.12877 17.0018 2.10735C16.9974 2.09739 16.993 2.09052 16.9896 2.0861H2.01041C2.00702 2.09051 2.00258 2.09736 1.99819 2.10729C1.98872 2.12867 1.98469 2.15306 1.98655 2.17491Z\" fill=\"black\"/> </svg>`,\n  },\n  {\n    iconName: CUSTOM_ICONS['placeholder-outlined'],\n    rawHTML: `<svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M12.0909 0.454545H1.90909C1.10909 0.454545 0.454545 1.10909 0.454545 1.90909V12.0909C0.454545 12.8909 1.10909 13.5455 1.90909 13.5455H12.0909C12.8909 13.5455 13.5455 12.8909 13.5455 12.0909V1.90909C13.5455 1.10909 12.8909 0.454545 12.0909 0.454545ZM12.0909 12.0909H1.90909V1.90909H12.0909V12.0909ZM8.42545 7.21091L6.42545 9.78546L5 8.06909L3 10.6364H11L8.42545 7.21091Z\" fill=\"black\"/>\n</svg>`,\n  },\n  {\n    iconName: CUSTOM_ICONS['add-circle-outlined'],\n    rawHTML: `<svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13.5455 7C13.5455 10.615 10.615 13.5455 7 13.5455C3.38504 13.5455 0.454544 10.615 0.454544 7C0.454544 3.38504 3.38504 0.454544 7 0.454544C10.615 0.454544 13.5455 3.38504 13.5455 7ZM12.3405 7C12.3405 9.94948 9.94948 12.3405 7 12.3405C4.05051 12.3405 1.65948 9.94948 1.65948 7C1.65948 4.05051 4.05051 1.65948 7 1.65948C9.94948 1.65948 12.3405 4.05051 12.3405 7Z\" fill=\"black\"/>\n<path d=\"M7.65477 4.41418C7.65477 4.05268 7.36172 3.75963 7.00023 3.75963C6.63873 3.75963 6.34568 4.05268 6.34568 4.41418V6.34553H4.41481C4.05332 6.34553 3.75978 6.63858 3.75978 7.00007C3.75978 7.36157 4.05283 7.65462 4.41433 7.65462H6.34568V9.58597C6.34568 9.94747 6.63873 10.2405 7.00023 10.2405C7.36172 10.2405 7.65477 9.94747 7.65477 9.58597V7.65462H9.58613C9.94762 7.65462 10.2407 7.36157 10.2407 7.00007C10.2407 6.63858 9.94762 6.34553 9.58613 6.34553H7.65477V4.41418Z\" fill=\"black\"/>\n</svg>\n`,\n  },\n]"
+                }
+            ],
             "stories/my-lib.stories.ts": [
                 {
                     "name": "DonnaTheme",
@@ -694,14 +841,91 @@
             ]
         },
         "groupedFunctions": {},
-        "groupedEnumerations": {},
+        "groupedEnumerations": {
+            "dist/theuy-ui/donna/icons/index.ts": [
+                {
+                    "name": "CUSTOM_ICONS",
+                    "childs": [
+                        {
+                            "name": "filter-outlined",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "placeholder-outlined",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "add-circle-outlined",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "file": "dist/theuy-ui/donna/icons/index.ts"
+                }
+            ],
+            "projects/theuy-ui/src/donna/icons/index.ts": [
+                {
+                    "name": "CUSTOM_ICONS",
+                    "childs": [
+                        {
+                            "name": "filter-outlined",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "placeholder-outlined",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "add-circle-outlined",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "file": "projects/theuy-ui/src/donna/icons/index.ts"
+                }
+            ]
+        },
         "groupedTypeAliases": {}
     },
     "routes": [],
     "coverage": {
-        "count": 4,
+        "count": 3,
         "status": "low",
         "files": [
+            {
+                "filePath": "dist/theuy-ui/donna/icons/index.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "customIcons",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/theuy-ui/src/donna/icons/index.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "customIcons",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
             {
                 "filePath": "projects/theuy-ui/src/lib/theuy-ui.component.ts",
                 "type": "component",
@@ -717,7 +941,7 @@
                 "linktype": "injectable",
                 "name": "TheuyUiService",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {

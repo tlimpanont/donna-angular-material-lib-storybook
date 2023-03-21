@@ -2,115 +2,80 @@
 @use '@angular/material' as mat;
 @use "../tokens" as tokens;
 
-/**
-// omitting the [size] class will default to medium
-icon-only === <button mat-icon-button />
-rounded === <button mat-flat-button class=“rounded-button [small]-button” />
-normal === <button mat-flat-button class=” [small]-button” />
- */
-
-@mixin smallButtonSize() {
-  padding: tokens.$size-button-small-padding-top-default
-    tokens.$size-button-small-padding-right-default
-    tokens.$size-button-small-padding-bottom-default
-    tokens.$size-button-small-padding-left-default;
-}
-
-@mixin mediumButtonSize() {
-  padding: tokens.$size-button-primary-padding-top-default
-    tokens.$size-button-primary-padding-right-default
-    tokens.$size-button-primary-padding-bottom-default
-    tokens.$size-button-primary-padding-left-default;
-}
-
-@mixin disabledState($palette) {
-  &:disabled {
-    color: mat.get-contrast-color-from-palette($palette, 700);
-    opacity: 0.16;
-    background-color: #90a4ae; //need to come from the token
-  }
-}
-
-@mixin focusState() {
-  &:focus {
-    background-color: #90a4ae; //need to come from the token
-    box-shadow: inset 0 0 0 2px white;
-  }
-}
-
-@mixin color($theme) {
-  // Get the color config from the theme.
-  $color-config: mat.get-color-config($theme);
-
-  // Get the primary color palette from the color-config.
-  $primary-palette: map.get($color-config, "primary");
-
-  [mat-icon-button] {
-    @include disabledState($primary-palette);
-    @include focusState();
-    /*
-    Sizing. Although the icons in the font can be scaled to any size,
-    in accordance with material design icons guidelines,
-    we recommend them to be shown in either 18, 24, 36 or 48px. The default being 24px.
-     */
-    .mat-icon {
-      // Drawback 1:  moeilijk te sizen, en ook rekening houden
-      // dat de padding eromheen correct moet zijn
-    }
-
-    background-color: mat.get-color-from-palette($primary-palette);
-    color: mat.get-contrast-color-from-palette($primary-palette, 500);
-  }
-
-  [mat-flat-button],
-  [mat-raised-button],
-  [mat-button],
-  [mat-stroked-button] {
-    @include mediumButtonSize();
-    /*
-      Drawback 2:
-      Dit concept van small(er) button gaat tegen principe van material.
-      https://m2.material.io/components/buttons#specs
-      De padding en top bijv. mag niet kleiner..
-      omdat zij vinden dat je bepaalde raakvlak nodig moet hebben.
-      Zelfs als ik padding: 0 in de component zal zetten,
-      dan nog blijft het minimaal een bepaalde ruimte hebben.
-    */
-    @include disabledState($primary-palette);
-    @include focusState();
-
-    &:hover {
-      // Drawback 3:  zelfs wanneer je expliciet de hover state overschrijft,
-      // blijf je een darken hover kleur zien
-    }
-
-    &.small-button {
-      @include smallButtonSize();
-
-      mat-icon {
-        margin-right: tokens.$size-button-small-gap-default;
-        margin-left: tokens.$size-button-small-gap-default;
-      }
-    }
-
-    &.rounded-button {
-      border-radius: 100px;
-    }
-  }
-}
-
-@mixin typography($theme) {
-  $typography-config: mat.get-typography-config($theme);
-}
-
 @mixin theme($theme) {
   $color-config: mat.get-color-config($theme);
-  @if $color-config != null {
-    @include color($theme);
-  }
+  $primary-palette: map.get($color-config, "primary");
 
-  $typography-config: mat.get-typography-config($theme);
-  @if $typography-config != null {
-    @include typography($theme);
+  [donna-flat-button], [donna-rounded-button], [donna-fab-button] {
+    @include smallButtonShape();
+    width: fit-content;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: tokens.$size-button-small-gap-default;
+    background-color: mat.get-contrast-color-from-palette($primary-palette, 500);
+    color: #90A4AE;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: tokens.$typography-button-small-font-family;
+    line-height: tokens.$typography-button-small-line-height;
+
+    &.selected, &:active {
+      @include selectedState();
+    }
+
+    &:hover {
+      @include hoverState();
+    }
+
+    &:focus {
+      @include hoverState();
+      outline: none;
+    }
+
+  }
+  [donna-rounded-button] {
+    border-radius: 100px;
+  }
+  [donna-fab-button] {
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
   }
 }
+
+
+@mixin smallButtonShape() {
+  padding: tokens.$size-button-small-padding-top-default tokens.$size-button-small-padding-right-default tokens.$size-button-small-padding-bottom-default tokens.$size-button-small-padding-left-default;
+  //margin: tokens.$size-button-small-gap-default;
+  border-radius: tokens.$radius-button-primary-small;
+  border: none;
+  font-family: tokens.$typography-button-small-font-family;
+  font-weight: to-lower-case(tokens.$typography-button-small-font-weight);
+  line-height: tokens.$typography-button-small-line-height;
+  font-size: tokens.$typography-button-small-font-size;
+  letter-spacing: tokens.$typography-button-small-letter-spacing;
+
+  mat-icon {
+    line-height: tokens.$typography-button-small-line-height * 2;
+
+    svg {
+      width: tokens.$sizing-icon-primary-small;
+      height: tokens.$sizing-icon-primary-small;
+    }
+  }
+}
+
+@mixin selectedState() {
+  background-color: #CED8DD;
+  color: inherit;
+  font-weight: 500;
+}
+
+@mixin hoverState() {
+  color: #36393D;
+  background-color: #90A4AE;
+  font-weight: 500;
+
+}
+

@@ -1,32 +1,13 @@
 @use 'sass:map';
 @use "@angular/material" as mat;
-//mat.$theme-ignore-duplication-warnings: true;
-
-
+@use "tokens" as tokens;
 @use "palette" as palette;
 @use 'button/button-theme' as button;
+//mat.$theme-ignore-duplication-warnings: true;
 
 @include mat.core();
 
-
-
 $donna-palette: mat.define-palette(palette.$donna-palette);
-$nsblue-palette: mat.define-palette(palette.$nsblue-palette);
-$nslightblue-palette: mat.define-palette(palette.$nslightblue-palette);
-$nsyellow-palette: mat.define-palette(palette.$nsyellow-palette);
-$nswhite-palette: mat.define-palette(palette.$nswhite-palette);
-
-$donna-light-theme: mat.define-light-theme(
-    (
-      color: (
-        primary: $donna-palette,
-        accent: $donna-palette,
-        warn: $donna-palette,
-      ),
-      typography: mat.define-typography-config(),
-      density: 0,
-    ),
-);
 
 $donna-dark-theme: mat.define-dark-theme(
     (
@@ -40,28 +21,6 @@ $donna-dark-theme: mat.define-dark-theme(
     ),
 );
 
-$ns-light-theme: mat.define-light-theme(
-    (
-      color: (
-        primary: $nsblue-palette,
-        accent: $nslightblue-palette,
-        warn: $nsyellow-palette,
-      ),
-      typography: mat.define-typography-config(),
-      density: 0,
-    ),
-);
-
-@include mat.all-component-typographies($donna-light-theme);
-
-.donna-theme {
-  color: white;
-  background-color: #1E1E1E;
-  @include mat.all-component-colors($donna-dark-theme);
-  @include button.theme($donna-dark-theme);
-}
-
-.ns-theme {
-  @include mat.all-component-colors($ns-light-theme);
-  @include button.theme($ns-light-theme);
-}
+@include mat.all-component-typographies($donna-dark-theme);
+@include mat.all-component-colors($donna-dark-theme);
+@include button.theme($donna-dark-theme);

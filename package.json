@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --project theuy-ui",
+    "build": "ng build --configuration production --project theuy-ui",
     "watch": "ng build --watch --configuration development --project theuy-ui",
     "test": "ng test",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",

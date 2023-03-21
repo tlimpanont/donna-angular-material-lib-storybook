@@ -1,21 +1,21 @@
-  // Do not edit directly
-// Generated on Wed, 15 Mar 2023 09:14:16 GMT
+// Do not edit directly
+// Generated on Fri, 17 Mar 2023 09:45:17 GMT
 
-$size-button-primary-padding-left-default: 1.25rem;
-$size-button-primary-padding-right-default: 1.25rem;
-$size-button-primary-gap-default: 0.6rem;
-$size-button-primary-padding-top-default: 0.6rem;
-$size-button-primary-padding-bottom-default: 0.6rem;
+$size-button-medium-padding-left-default: 1.25rem;
+$size-button-medium-padding-right-default: 1.25rem;
+$size-button-medium-gap-default: 0.6rem;
+$size-button-medium-padding-top-default: 0.6rem;
+$size-button-medium-padding-bottom-default: 0.6rem;
 $size-button-small-padding-right-default: 0.25rem;
 $size-button-small-padding-left-default: 0.25rem;
 $size-button-small-padding-top-default: 0.125rem;
 $size-button-small-padding-bottom-default: 0.125rem;
 $size-button-small-gap-default: 0.25rem;
-$size-button-small-icon-only-padding-right-default: 0.125rem;
-$size-button-small-icon-only-padding-left-default: 0.125rem;
-$size-button-small-icon-only-padding-top-default: 0.125rem;
-$size-button-small-icon-only-padding-bottom-default: 0.125rem;
-$size-button-small-icon-only-gap-default: 0.25rem;
+$size-button-fab-padding-right-default: 0.125rem;
+$size-button-fab-padding-left-default: 0.125rem;
+$size-button-fab-padding-top-default: 0.125rem;
+$size-button-fab-padding-bottom-default: 0.125rem;
+$size-button-fab-gap-default: 0.25rem;
 $size-foundation-primary-padding-left-default: 1.25rem;
 $size-foundation-primary-padding-right-default: 1.25rem;
 $size-foundation-primary-gap-default: 0.6rem;
@@ -36,6 +36,7 @@ $size-foundation-base-size14: 0.875rem;
 $size-foundation-base-size16: 1rem;
 $size-foundation-base-size18: 1.125rem;
 $size-foundation-base-size20: 1.25rem;
+$size-foundation-base-size32: 2rem;
 $color-foundation-geyser: #cfd8dc;
 $color-foundation-black: #000000;
 $color-button-primary-background-default: #cfd8dc;
@@ -61,6 +62,11 @@ $typography-lineheight-button-small-default: 1rem;
 $typography-lineheight-button-medium-default: 1rem;
 $typography-letterspacing-foundation-small: 1;
 $typography-letterspacing-button-small-small: 1;
-//$typography-button-small: [object Object];
+$typography-button-small-font-family: Roboto;
+$typography-button-small-font-weight: Medium;
+$typography-button-small-line-height: 1rem;
+$typography-button-small-font-size: 0.875rem;
+$typography-button-small-letter-spacing: 1;
 $sizing-icon-primary-medium: 22;
-$sizing-icon-primary-small: 16;
+$sizing-icon-primary-large: 2rem;
+$sizing-icon-primary-small: 1rem;
